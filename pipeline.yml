@@ -1,0 +1,18 @@
+---
+jobs:
+  - name: renew-certificate
+    serial: true
+    plan:
+      - {trigger: true, get: lets-encrypt-pipeline-src, tags: ['blue-box'], timeout: 2h}
+      - task: renew-certificate
+        tags: ['blue-box']
+        timeout: 2h
+        file: lets-encrypt-pipeline-src/tasks/renew-certificate.yml
+
+resources:
+  - name: lets-encrypt-pipeline-src
+    type: git
+    tags: ['blue-box']
+    source:
+      uri: https://github.com/Kiemes/lets-encrypt-pipeline.git
+      branch: master
