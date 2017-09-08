@@ -3,7 +3,7 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: ubuntu/16.04
+    repository: boshcpi/openstack-cpi-release
 inputs:
   - name: lets-encrypt-pipeline-src
 run:
