@@ -3,9 +3,13 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: ubuntu
-    tag: 16.04
+    repository: kiemes/lets-encrypt
 inputs:
   - name: lets-encrypt-pipeline-src
+outputs:
+  - name: certificate
 run:
   path: lets-encrypt-pipeline-src/tasks/renew-certificate.sh
+params:
+  HOSTED_ZONE_ID:
+  AWS_DEFAULT_REGION:

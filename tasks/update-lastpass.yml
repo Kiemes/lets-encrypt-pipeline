@@ -1,0 +1,10 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: kiemes/lets-encrypt
+inputs:
+  - name: certificate
+run:
+  path: lets-encrypt-pipeline-src/tasks/update-lastpass.sh

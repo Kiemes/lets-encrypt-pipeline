@@ -8,6 +8,9 @@ jobs:
         tags: ['blue-box']
         timeout: 2h
         file: lets-encrypt-pipeline-src/tasks/renew-certificate.yml
+        params:
+          HOSTED_ZONE_ID: /hostedzone/ZLTT3AJMW4BA1
+          AWS_DEFAULT_REGION: us-west-2
 
 resources:
   - name: lets-encrypt-pipeline-src
