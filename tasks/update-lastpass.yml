@@ -5,6 +5,7 @@ image_resource:
   source:
     repository: kiemes/lets-encrypt
 inputs:
-  - name: certificate
+  - name: lets-encrypt-pipeline-src
+  - name: letsencrypt
 run:
   path: lets-encrypt-pipeline-src/tasks/update-lastpass.sh

@@ -14,6 +14,11 @@ jobs:
           AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
           AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
 
+      - task: update-lastpass
+        tags: ['blue-box']
+        timeout: 2h
+        file: lets-encrypt-pipeline-src/tasks/update-lastpass.yml
+
 resources:
   - name: lets-encrypt-pipeline-src
     type: git
