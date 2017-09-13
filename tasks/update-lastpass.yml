@@ -3,9 +3,9 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: kiemes/lets-encrypt
+    repository: boshcpi/openstack-cpi-release
 inputs:
   - name: lets-encrypt-pipeline-src
   - name: letsencrypt
 run:
-  path: lets-encrypt-pipeline-src/tasks/update-lastpass.sh
+  path: lets-encrypt-pipeline-src/tasks/update-lastpass.rb
