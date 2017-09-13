@@ -18,13 +18,11 @@ if [ -z $CERTBOT_DOMAIN ]; then
     --config-dir $PWD/letsencrypt \
     --work-dir $PWD/letsencrypt \
     --logs-dir $PWD/letsencrypt \
-    --test-cert \
     --register-unsafely-without-email \
     --agree-tos \
     --domain bosh-ci.cpi.sapcloud.io \
     --manual-public-ip-logging-ok \
     --manual-cleanup-hook $PWD/$0 \
-
 
 else
   [[ $CERTBOT_AUTH_OUTPUT ]] && ACTION="DELETE" || ACTION="UPSERT"
