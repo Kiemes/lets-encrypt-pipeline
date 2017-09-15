@@ -2,7 +2,7 @@
 
 set -e
 
-DOCKER_IMAGE=kiemes/lets-encrypt
+DOCKER_IMAGE=boshcpi/letsencrypt
 
 docker login
 
