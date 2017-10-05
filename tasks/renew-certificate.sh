@@ -9,16 +9,16 @@ set -e
 : ${CERTIFICATE_DOMAIN:?}
 
 if [ -z $CERTBOT_DOMAIN ]; then
-  mkdir -p $PWD/$CERTIFICATE_DOMAIN
+  mkdir -p $PWD/letsencrypt
 
   certbot certonly \
     --non-interactive \
     --manual \
     --manual-auth-hook $PWD/$0 \
     --preferred-challenge dns \
-    --config-dir $PWD/$CERTIFICATE_DOMAIN \
-    --work-dir $PWD/$CERTIFICATE_DOMAIN \
-    --logs-dir $PWD/$CERTIFICATE_DOMAIN \
+    --config-dir $PWD/letsencrypt \
+    --work-dir $PWD/letsencrypt \
+    --logs-dir $PWD/letsencrypt \
     --register-unsafely-without-email \
     --agree-tos \
     --domain $CERTIFICATE_DOMAIN \
