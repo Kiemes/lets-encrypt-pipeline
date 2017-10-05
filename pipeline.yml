@@ -1,9 +1,9 @@
 ---
 jobs:
-  - name: renew-certificate
+  - name: renew-concourse-certificate
     serial: true
     plan:
-      - {trigger: true, get: lets-encrypt-pipeline-src, tags: ['blue-box'], timeout: 2h}
+      - {trigger: false, get: lets-encrypt-pipeline-src, tags: ['blue-box'], timeout: 2h}
       - task: renew-certificate
         tags: ['blue-box']
         timeout: 2h
@@ -13,11 +13,36 @@ jobs:
           AWS_DEFAULT_REGION: ((AWS_DEFAULT_REGION))
           AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
           AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
+          CERTIFICATE_DOMAIN: bosh-ci.cpi.sapcloud.io
 
-      - task: update-lastpass
+      - task: print-certificate
         tags: ['blue-box']
         timeout: 2h
-        file: lets-encrypt-pipeline-src/tasks/update-lastpass.yml
+        file: lets-encrypt-pipeline-src/tasks/print-certificate.yml
+        params:
+          CERTIFICATE_DOMAIN: bosh-ci.cpi.sapcloud.io
+
+  - name: renew-grafana-certificate
+    serial: true
+    plan:
+      - {trigger: false, get: lets-encrypt-pipeline-src, tags: ['blue-box'], timeout: 2h}
+      - task: renew-certificate
+        tags: ['blue-box']
+        timeout: 2h
+        file: lets-encrypt-pipeline-src/tasks/renew-certificate.yml
+        params:
+          HOSTED_ZONE_ID: ((HOSTED_ZONE_ID))
+          AWS_DEFAULT_REGION: ((AWS_DEFAULT_REGION))
+          AWS_ACCESS_KEY_ID: ((AWS_ACCESS_KEY_ID))
+          AWS_SECRET_ACCESS_KEY: ((AWS_SECRET_ACCESS_KEY))
+          CERTIFICATE_DOMAIN: grafana.cpi.sapcloud.io
+
+      - task: print-certificate
+        tags: ['blue-box']
+        timeout: 2h
+        file: lets-encrypt-pipeline-src/tasks/print-certificate.yml
+        params:
+          CERTIFICATE_DOMAIN: grafana.cpi.sapcloud.io
 
 resources:
   - name: lets-encrypt-pipeline-src

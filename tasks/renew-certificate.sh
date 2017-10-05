@@ -6,6 +6,7 @@ set -e
 : ${AWS_DEFAULT_REGION:?}
 : ${AWS_ACCESS_KEY_ID:?}
 : ${AWS_SECRET_ACCESS_KEY:?}
+: ${CERTIFICATE_DOMAIN:?}
 
 if [ -z $CERTBOT_DOMAIN ]; then
   mkdir -p $PWD/letsencrypt
@@ -20,7 +21,7 @@ if [ -z $CERTBOT_DOMAIN ]; then
     --logs-dir $PWD/letsencrypt \
     --register-unsafely-without-email \
     --agree-tos \
-    --domain bosh-ci.cpi.sapcloud.io \
+    --domain $CERTIFICATE_DOMAIN \
     --manual-public-ip-logging-ok \
     --manual-cleanup-hook $PWD/$0 \
 
