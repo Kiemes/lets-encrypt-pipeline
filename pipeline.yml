@@ -50,4 +50,4 @@ resources:
     tags: ['blue-box']
     source:
       uri: https://github.com/Kiemes/lets-encrypt-pipeline.git
-      branch: grafana-test
+      branch: master
